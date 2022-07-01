@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../utils/dimensions.dart';
-
 class DownloadIcon extends StatelessWidget {
   final double boxSize;
   final double iconSize;

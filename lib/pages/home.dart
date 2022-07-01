@@ -1,3 +1,5 @@
+
+
 import 'package:crud/controller/movies_controller.dart';
 import 'package:crud/controller/popular_today_controller.dart';
 import 'package:crud/controller/search_movies_controller.dart';
@@ -18,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
   final TopMoviesController topMoviesController =
       Get.put(TopMoviesController());
@@ -39,7 +42,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: BaseAppBar(
-          title: const Text("Iyu-Mov"),
+          title: const Text("Yephow7"),
           appBar: AppBar(),
           myMenuItems: const ["Home", "Post A Movie"]),
       body: Column(
@@ -47,59 +50,78 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           SizedBox(
             height: Dimensions.height10,
           ),
+
           SizedBox(
             height: Dimensions.height45 * 1.5,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: Dimensions.width30, vertical: 0.0),
-                    margin:
-                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius15),
-                        color: const Color.fromARGB(255, 56, 55, 55)),
-                    child: TextFormField(
+            child: Form(
+              key: _formKey,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Dimensions.width30, vertical: 0.0),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius15),
+                          color: const Color.fromARGB(255, 56, 55, 55)),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
                         controller: _textController,
                         style: const TextStyle(color: Colors.white),
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          errorStyle: TextStyle(
+                            fontSize: Dimensions.font16,
+                            height: 0.3
+                          ),
                           border: InputBorder.none,
                           hintText: "Search for a movie",
-                          hintStyle: TextStyle(
+                          hintStyle: const TextStyle(
                               color: Color.fromARGB(255, 143, 143, 143)),
-                        )),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed("/search",
-                        arguments: {"text": _textController.text});
-                    searchMoviesController.fetchProduct(_textController.text);
-                  },
-                  child: Container(
-                    height: Dimensions.height45 * 1.2,
-                    width: Dimensions.height45 * 1.2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.radius15),
-                      gradient: const LinearGradient(
-                        colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
-                        begin: Alignment.bottomRight,
-                        end: Alignment.topLeft,
-                      ),
-                    ),
-                    margin:
-                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
-                    child: const Center(
-                      child: Icon(
-                        CupertinoIcons.search,
-                        color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                )
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        Get.toNamed("/search",
+                            arguments: {"text": _textController.text});
+                        searchMoviesController
+                            .fetchProduct(_textController.text);
+                      }
+                    },
+                    child: Container(
+                      height: Dimensions.height45 * 1.2,
+                      width: Dimensions.height45 * 1.2,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius15),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
+                        ),
+                      ),
+                      margin:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                      child: const Center(
+                        child: Icon(
+                          CupertinoIcons.search,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           SizedBox(

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:crud/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
-  Color? color;
+  final Color? color;
   final String text;
-  double size;
-  TextOverflow overflow;
-  FontWeight fontWeight;
-  BigText(
+  final double size;
+  final TextOverflow overflow;
+  final FontWeight fontWeight;
+  const BigText(
       {Key? key,
       this.color = const Color.fromARGB(255, 255, 255, 255),
       required this.text,

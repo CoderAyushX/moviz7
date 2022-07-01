@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../utils/dimensions.dart';
 
+//* circle icons widgets
 class AppIcon extends StatelessWidget {
   final IconData icon;
   final Color backgrounColor;

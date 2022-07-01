@@ -1,10 +1,9 @@
 import 'package:crud/widgets/smalltext.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 import 'bigtext.dart';
 
+//? stars and rating widget for movie detail page
 class AppColoumn extends StatelessWidget {
   final String text;
   final int rating;
@@ -28,16 +27,16 @@ class AppColoumn extends StatelessWidget {
             Wrap(
               children: List.generate(
                   5,
-                  (index) => Icon(
+                  (index) => const Icon(
                         Icons.star,
-                        color: AppColors.yellowColor,
+                        color: Color(0xFFffd379),
                         size: 15,
                       )),
             ),
             SizedBox(
               width: Dimensions.width10,
             ),
-            SmallText(text: "4.5"),
+            const SmallText(text: "4.5"),
             SizedBox(
               width: Dimensions.width10,
             ),
@@ -45,7 +44,7 @@ class AppColoumn extends StatelessWidget {
             SizedBox(
               width: Dimensions.width10,
             ),
-            SmallText(text: "ratings")
+            const SmallText(text: "ratings")
           ],
         ),
       ],

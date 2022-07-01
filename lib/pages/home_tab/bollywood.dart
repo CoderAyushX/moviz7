@@ -7,8 +7,8 @@ import 'package:crud/widgets/home/grid_for_movies.dart';
 class Bollywood extends StatelessWidget {
   final String text;
   final String text2;
-  var controller;
-  Bollywood(
+  final dynamic controller;
+  const Bollywood(
       {Key? key,
       required this.text,
       required this.text2,

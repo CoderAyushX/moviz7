@@ -1,5 +1,6 @@
 import 'package:crud/utils/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Text title;
@@ -11,17 +12,13 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       required this.appBar,
       required this.myMenuItems})
       : super(key: key);
-
+  //? function to detect which button is clicked
   void onSelect(item) {
     switch (item) {
       case 'Home':
-        print(Dimensions.height10);
         break;
-      case 'Profile':
-        print('Profile clicked');
-        break;
-      case 'Setting':
-        print('Setting clicked');
+      case 'Post A Movie':
+        Get.toNamed("/postamovie");
         break;
     }
   }
@@ -30,9 +27,11 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      //* actions buttons
       actions: <Widget>[
         Padding(
             padding: EdgeInsets.only(right: Dimensions.width20),
+            //? notification dot button
             child: GestureDetector(
               onTap: () {},
               child: const Icon(
@@ -40,13 +39,14 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
                 size: 26.0,
               ),
             )),
+        //? three dot button
         PopupMenuButton<String>(
             color: const Color.fromARGB(255, 33, 33, 33),
             onSelected: onSelect,
             itemBuilder: (BuildContext context) {
               return myMenuItems.map((String choice) {
+                //? itmes for popup menu
                 return PopupMenuItem<String>(
-          
                   value: choice,
                   child: SizedBox(
                     width: 130.0,
@@ -61,7 +61,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
-
+  //* abstract class overriding
   @override
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);
 }

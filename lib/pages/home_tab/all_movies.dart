@@ -1,3 +1,4 @@
+import 'package:crud/controller/movies_controller.dart';
 import 'package:crud/controller/popular_today_controller.dart';
 import 'package:crud/controller/top_movies_controller.dart';
 import 'package:crud/widgets/bigtext.dart';
@@ -13,6 +14,7 @@ class AllMovies extends StatelessWidget {
   AllMovies({Key? key}) : super(key: key);
   final TopMoviesController topMoviesController = Get.find();
   final PopularTodayController popularTodayController = Get.find();
+  final MoviesController moviesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -57,7 +59,7 @@ class AllMovies extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      BigText(
+                                      const BigText(
                                         text: "Popular Today",
                                         fontWeight: FontWeight.w700,
                                       ),
@@ -116,7 +118,7 @@ class AllMovies extends StatelessWidget {
                 left: Dimensions.width20,
                 top: Dimensions.height30,
                 bottom: Dimensions.height30),
-            child: BigText(
+            child: const BigText(
               text: "Top movies",
               size: 20,
               fontWeight: FontWeight.w700,
@@ -130,14 +132,14 @@ class AllMovies extends StatelessWidget {
                 left: Dimensions.width20,
                 top: Dimensions.height30,
                 bottom: Dimensions.height20),
-            child: BigText(
+            child: const BigText(
               text: "You may like",
               size: 20,
               fontWeight: FontWeight.w700,
             ),
           ),
           YouMayLike(
-            movies: topMoviesController.topMoviesList,
+            movies: moviesController.moviesList,
           ),
         ],
       ),

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class SmallText extends StatelessWidget {
-  Color? color;
+  final Color? color;
   final String text;
-  double size;
-  double height;
-  TextOverflow textOverflow;
-  SmallText({
+  final double size;
+  final double height;
+  final TextOverflow textOverflow;
+  const SmallText({
     Key? key,
     this.color = const Color(0xFFccc7c5),
     required this.text,

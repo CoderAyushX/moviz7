@@ -1,10 +1,10 @@
-import 'package:crud/utils/colors.dart';
 import 'package:crud/widgets/smalltext.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/dimensions.dart';
 
 class ExpandableTextWidget extends StatefulWidget {
+  //* getting text
   final String text;
   const ExpandableTextWidget({Key? key, required this.text}) : super(key: key);
 
@@ -13,13 +13,15 @@ class ExpandableTextWidget extends StatefulWidget {
 }
 
 class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
+  //* late texts
   late String firstHalf;
   late String secondHalf;
 
   bool hiddenText = true;
-
+  //? claculating height
   double textHeight = Dimensions.screenHeight / 5.63;
 
+  //* running check when first launch
   @override
   void initState() {
     super.initState();
@@ -62,15 +64,15 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                   }),
                   child: Row(
                     children: [
-                      SmallText(
+                      const SmallText(
                         text: "Show more",
-                        color:  AppColors.mainColor,
+                        color: Color(0xFF89dad0),
                       ),
                       Icon(
                         hiddenText
                             ? Icons.arrow_drop_down
                             : Icons.arrow_drop_up,
-                        color: AppColors.mainColor,
+                        color: const Color(0xFF89dad0),
                       )
                     ],
                   ),

@@ -2,6 +2,7 @@ import 'package:crud/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/link.dart';
 import '../widgets/app_colum.dart';
 import '../widgets/app_icon.dart';
 import '../widgets/bigtext.dart';
@@ -82,7 +83,7 @@ class MovieDetails extends StatelessWidget {
                   SizedBox(
                     height: Dimensions.height20,
                   ),
-                  BigText(text: "Introduce"),
+                  const BigText(text: "Introduce"),
                   SizedBox(
                     height: Dimensions.height20,
                   ),
@@ -144,36 +145,45 @@ class MovieDetails extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(
-                  top: Dimensions.height10,
-                  bottom: Dimensions.height10,
-                  left: Dimensions.width20,
-                  right: Dimensions.width20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius10),
-                gradient: const LinearGradient(
-                  colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                ),
-              ),
-              child: Row(
-                children: [
-                  BigText(
-                    text: "Download",
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: Dimensions.width10,
-                  ),
-                  const Icon(
-                    Icons.download,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            )
+            Link(
+                uri: Uri.parse(Get.arguments["dlink"]),
+                target: LinkTarget.blank,
+                builder: (context, followLink) {
+                  return GestureDetector(
+                    onTap: followLink,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          top: Dimensions.height10,
+                          bottom: Dimensions.height10,
+                          left: Dimensions.width20,
+                          right: Dimensions.width20),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius10),
+                        gradient: const LinearGradient(
+                          colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const BigText(
+                            text: "Download",
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: Dimensions.width10,
+                          ),
+                          const Icon(
+                            Icons.download,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }),
           ],
         ),
       ),

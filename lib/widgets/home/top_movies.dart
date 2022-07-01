@@ -5,18 +5,21 @@ import '../../utils/dimensions.dart';
 import '../bigtext.dart';
 
 class TopMovies extends StatelessWidget {
-  var topmovies;
-  TopMovies({Key? key, required this.topmovies}) : super(key: key);
+  final dynamic topmovies;
+  const TopMovies({Key? key, required this.topmovies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    //* main container for listview to give padding and height
     return Container(
       padding: EdgeInsets.only(left: Dimensions.width20),
       height: Dimensions.pageViewContainer,
+      //? obx list view to build movies card
       child: Obx(() {
         return ListView.builder(
           itemCount: topmovies.length,
           itemBuilder: (context, index) {
+            //* movies card
             return Container(
               margin: EdgeInsets.only(right: Dimensions.width30),
               width: Dimensions.pageViewContainer,
@@ -40,6 +43,7 @@ class TopMovies extends StatelessWidget {
                       ),
                     ),
                   ),
+                  //? glash effect 
                   Positioned(
                       bottom: 0,
                       left: 0,
@@ -68,6 +72,7 @@ class TopMovies extends StatelessWidget {
                               ),
                             ),
                             GestureDetector(
+                              //* routing
                               onTap: (() {
                                 Get.toNamed("/moviedetails", arguments: {
                                   "name": topmovies[index].name,
@@ -90,6 +95,7 @@ class TopMovies extends StatelessWidget {
               ),
             );
           },
+          //? to make horizontal scroll
           scrollDirection: Axis.horizontal,
         );
       }),
