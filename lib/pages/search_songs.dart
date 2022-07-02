@@ -1,20 +1,21 @@
-import 'package:crud/controller/search_movies_controller.dart';
+import 'package:crud/controller/search_songs_controller.dart';
+import 'package:crud/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/top_movies_controller.dart';
+import '../controller/top_songs_controller.dart';
 import '../utils/dimensions.dart';
 import '../widgets/bigtext.dart';
 import '../widgets/smalltext.dart';
 
-class SearchResullt extends StatelessWidget {
-  SearchResullt({Key? key}) : super(key: key);
-  final TopMoviesController topMoviesController = Get.find();
-  final SearchMoviesController controller = Get.find();
+class SearchResult extends StatelessWidget {
+  SearchResult({Key? key}) : super(key: key);
+  final TopSongsController topMoviesController = Get.find();
+  final SearchSongsController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bg,
       appBar: AppBar(
         title: const Text("Search"),
       ),
@@ -38,24 +39,24 @@ class SearchResullt extends StatelessWidget {
                       ? ListView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: controller.searchMovieList.length,
+                          itemCount: controller.searchSongsList.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: (() {
-                                Get.toNamed("/moviedetails", arguments: {
+                                Get.toNamed("/songsdetails", arguments: {
                                   "name":
-                                      controller.searchMovieList[index].name,
+                                      controller.searchSongsList[index].name,
                                   "desc":
-                                      controller.searchMovieList[index].desc,
+                                      controller.searchSongsList[index].desc,
                                   "dlink":
-                                      controller.searchMovieList[index].dlink,
+                                      controller.searchSongsList[index].link,
                                   "rating":
-                                      controller.searchMovieList[index].rating,
+                                      controller.searchSongsList[index].rating,
                                   "lang":
-                                      controller.searchMovieList[index].lang,
-                                  "img": controller
-                                      .searchMovieList[index].movieImg,
-                                  "cat": controller.searchMovieList[index].cat
+                                      controller.searchSongsList[index].lang,
+                                  "img":
+                                      controller.searchSongsList[index].songImg,
+                                  "cat": controller.searchSongsList[index].cat
                                 });
                               }),
                               child: Container(
@@ -74,7 +75,7 @@ class SearchResullt extends StatelessWidget {
                                             Dimensions.radius10 * 0.5),
                                         child: Image.network(
                                           controller
-                                              .searchMovieList[index].movieImg,
+                                              .searchSongsList[index].songImg,
                                           fit: BoxFit.cover,
                                         ),
                                       )),
@@ -88,14 +89,14 @@ class SearchResullt extends StatelessWidget {
                                       children: [
                                         BigText(
                                           text: controller
-                                              .searchMovieList[index].name,
+                                              .searchSongsList[index].name,
                                           size: Dimensions.font22,
                                           fontWeight: FontWeight.w600,
                                         ),
                                         SizedBox(height: Dimensions.height10),
                                         SmallText(
                                           text: controller
-                                              .searchMovieList[index].desc,
+                                              .searchSongsList[index].desc,
                                           size: Dimensions.font18,
                                         ),
                                       ],
@@ -116,7 +117,11 @@ class SearchResullt extends StatelessWidget {
                               SizedBox(
                                 height: Dimensions.height30,
                               ),
-                              const BigText(text: "Loding....", size: 16, fontWeight: FontWeight.bold,)
+                              const BigText(
+                                text: "Loding....",
+                                size: 16,
+                                fontWeight: FontWeight.bold,
+                              )
                             ],
                           ),
                         )

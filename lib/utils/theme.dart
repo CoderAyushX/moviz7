@@ -12,7 +12,7 @@ class MyTheme {
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.white)),
         //*appbar theme
         appBarTheme: const AppBarTheme(
-            color: Colors.black,
+            color: Color.fromRGBO(8, 32, 50, 1),
             elevation: 0.0,
             iconTheme: IconThemeData(color: Colors.white70),
             titleTextStyle: TextStyle(

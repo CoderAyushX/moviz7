@@ -1,3 +1,4 @@
+import 'package:crud/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,23 +7,22 @@ import '../bigtext.dart';
 import '../smalltext.dart';
 
 class YouMayLike extends StatelessWidget {
-  final dynamic movies;
-  const YouMayLike({Key? key, required this.movies}) : super(key: key);
+  final dynamic songs;
+  const YouMayLike({Key? key, required this.songs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //* obx listview for movies card
+    //* obx listview for songs card
     return Obx(() {
       return ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: movies.length,
+          itemCount:songs.length,
           itemBuilder: (context, index) {
             return Container(
               margin: EdgeInsets.only(
                   bottom: Dimensions.height20, left: Dimensions.width20),
-              child: Row(
-                children: [
+              child: Row(children: [
                 Container(
                     width: Dimensions.height45 * 2.2,
                     height: Dimensions.height45 * 2.2,
@@ -33,10 +33,9 @@ class YouMayLike extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(Dimensions.radius10 * 0.5),
                       child: FadeInImage(
-                        placeholder:
-                            const AssetImage("assets/images/iyu.jpg"),
+                        placeholder: const AssetImage("assets/images/iyu.jpg"),
                         image: NetworkImage(
-                          movies[index].movieImg,
+                         songs[index].songImg,
                         ),
                         height: Dimensions.pageViewContainer,
                         fit: BoxFit.cover,
@@ -51,13 +50,13 @@ class YouMayLike extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BigText(
-                        text: movies[index].name,
+                        text:songs[index].name,
                         size: Dimensions.font22,
                         fontWeight: FontWeight.w600,
                       ),
                       SizedBox(height: Dimensions.height10),
                       SmallText(
-                        text: movies[index].desc,
+                        text:songs[index].desc,
                         size: Dimensions.font18,
                       ),
                     ],
@@ -66,14 +65,15 @@ class YouMayLike extends StatelessWidget {
                 GestureDetector(
                   //* routings with arguments
                   onTap: (() {
-                    Get.toNamed("/moviedetails", arguments: {
-                      "name": movies[index].name,
-                      "desc": movies[index].desc,
-                      "dlink": movies[index].dlink,
-                      "rating": movies[index].rating,
-                      "lang": movies[index].lang,
-                      "img": movies[index].movieImg,
-                      "cat": movies[index].cat
+                    Get.toNamed("/songsdetails", arguments: {
+                      "name":songs[index].name,
+                      "desc":songs[index].desc,
+                      "dlink":songs[index].link,
+                      "rate":songs[index].rate,
+                      "rating":songs[index].rating,
+                      "lang":songs[index].lang,
+                      "img":songs[index].songImg,
+                      "cat":songs[index].cat
                     });
                   }),
                   //* button to navigate
@@ -81,10 +81,9 @@ class YouMayLike extends StatelessWidget {
                     height: Dimensions.height45,
                     width: Dimensions.height45,
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(Dimensions.radius15),
-                      gradient: const LinearGradient(
-                        colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      gradient: LinearGradient(
+                        colors: [const Color(0xffffc3b1), AppColors.orange],
                         begin: Alignment.bottomRight,
                         end: Alignment.topLeft,
                       ),

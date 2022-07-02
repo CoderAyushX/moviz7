@@ -1,3 +1,4 @@
+import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +18,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     switch (item) {
       case 'Home':
         break;
-      case 'Post A Movie':
-        Get.toNamed("/postamovie");
+      case 'Post A Song':
+        Get.toNamed("/postasong");
         break;
     }
   }
@@ -41,7 +42,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
             )),
         //? three dot button
         PopupMenuButton<String>(
-            color: const Color.fromARGB(255, 33, 33, 33),
+            color: AppColors.primary,
             onSelected: onSelect,
             itemBuilder: (BuildContext context) {
               return myMenuItems.map((String choice) {

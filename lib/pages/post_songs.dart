@@ -1,4 +1,5 @@
 import 'package:crud/services/remote_service.dart';
+import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:crud/widgets/postmovies_textform.dart';
 import 'package:crud/widgets/bigtext.dart';
@@ -6,29 +7,29 @@ import 'package:crud/widgets/smalltext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PostAMovie extends StatelessWidget {
+class PostASong extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  PostAMovie({Key? key}) : super(key: key);
+ PostASong({Key? key}) : super(key: key);
 
   //? controllers
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController movieUrlController = TextEditingController();
+  final TextEditingController songUrlController = TextEditingController();
   final TextEditingController langController = TextEditingController();
   final TextEditingController catController = TextEditingController();
-  final TextEditingController dlinkController = TextEditingController();
+  final TextEditingController linkController = TextEditingController();
   final TextEditingController descController = TextEditingController();
 
   _postData() async {
     Map data = {
       "name": nameController.text.toString(),
       "desc": descController.text.toString(),
-      "dlink": dlinkController.text.toString(),
-      "movieImg": movieUrlController.text.toString(),
+      "link": linkController.text.toString(),
+      "songImg": songUrlController.text.toString(),
       "lang": langController.text.toString(),
       "cat": catController.text.toString(),
       "rating": 1.toString()
     };
-    await RemoteServices().postData(data, "postamovie");
+    await RemoteServices().postData(data, "postasongs");
     Get.snackbar("successfully posted", "Thanks for posting!",
         colorText: Colors.white,
         isDismissible: true,
@@ -39,7 +40,7 @@ class PostAMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: AppColors.bg,
         body: Container(
           margin: EdgeInsets.only(top: Dimensions.height35),
           child: SingleChildScrollView(
@@ -55,7 +56,7 @@ class PostAMovie extends StatelessWidget {
                       height: Dimensions.height150 / 4,
                     ),
                     BigText(
-                      text: "Post a movie link",
+                      text: "Post a song",
                       size: Dimensions.font26,
                       fontWeight: FontWeight.bold,
                     ),
@@ -67,12 +68,12 @@ class PostAMovie extends StatelessWidget {
                       height: Dimensions.height45,
                     ),
                     PostMoviesTextField(
-                      labletext: "Movie Image Url",
+                      labletext: "Song Image Url",
                       icon: const Icon(
                         Icons.image,
                         color: Colors.white,
                       ),
-                      controller: movieUrlController,
+                      controller:songUrlController,
                       regExp: RegExp(
                           r"^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"),
                     ),
@@ -80,7 +81,7 @@ class PostAMovie extends StatelessWidget {
                       height: Dimensions.height30,
                     ),
                     PostMoviesTextField(
-                      labletext: "Movie Name",
+                      labletext: "Song Name",
                       icon: const Icon(
                         Icons.text_fields_rounded,
                         color: Colors.white,
@@ -153,12 +154,12 @@ class PostAMovie extends StatelessWidget {
                       height: Dimensions.height30,
                     ),
                     PostMoviesTextField(
-                      labletext: "download link",
+                      labletext: "Song link",
                       icon: const Icon(
                         Icons.download,
                         color: Colors.white,
                       ),
-                      controller: dlinkController,
+                      controller: linkController,
                       regExp: RegExp(
                           r"^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"),
                     ),
@@ -176,7 +177,7 @@ class PostAMovie extends StatelessWidget {
                             }
                           }),
                           style: ElevatedButton.styleFrom(
-                              primary: const Color(0xffff6a3b),
+                              primary: AppColors.orange,
                               textStyle: TextStyle(
                                 fontSize: Dimensions.font22,
                                 fontWeight: FontWeight.bold,
@@ -187,8 +188,8 @@ class PostAMovie extends StatelessWidget {
                         ),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                                color: Color(0xffff6a3b), width: 1),
+                            side:  BorderSide(
+                                color: AppColors.orange, width: 1),
                           ),
                           onPressed: () {
                             Get.back();

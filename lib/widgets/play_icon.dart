@@ -1,10 +1,11 @@
+import 'package:crud/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DownloadIcon extends StatelessWidget {
+class PlayIcon extends StatelessWidget {
   final double boxSize;
   final double iconSize;
-  const DownloadIcon({Key? key, required this.boxSize,  this.iconSize =24.0})
+  const PlayIcon({Key? key, required this.boxSize, this.iconSize = 24.0})
       : super(key: key);
 
   @override
@@ -14,17 +15,17 @@ class DownloadIcon extends StatelessWidget {
       width: boxSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(boxSize / 2),
-        gradient: const LinearGradient(
-          colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+        gradient: LinearGradient(
+          colors: [const Color(0xffffc3b1), AppColors.orange],
           begin: Alignment.bottomRight,
           end: Alignment.topLeft,
         ),
       ),
       child: Center(
         child: Icon(
-          CupertinoIcons.arrow_down_to_line_alt,
+          CupertinoIcons.play_circle_fill,
           color: Colors.white,
-          size:iconSize,
+          size: iconSize,
         ),
       ),
     );

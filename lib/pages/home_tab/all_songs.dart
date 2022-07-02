@@ -1,20 +1,21 @@
-import 'package:crud/controller/movies_controller.dart';
+import 'package:crud/controller/songs_controller.dart';
 import 'package:crud/controller/popular_today_controller.dart';
-import 'package:crud/controller/top_movies_controller.dart';
+import 'package:crud/controller/top_songs_controller.dart';
+import 'package:crud/utils/colors.dart';
 import 'package:crud/widgets/bigtext.dart';
-import 'package:crud/widgets/download_icon.dart';
-import 'package:crud/widgets/home/top_movies.dart';
+import 'package:crud/widgets/play_icon.dart';
+import 'package:crud/widgets/home/top_songs.dart';
 import 'package:crud/widgets/home/you_may_like.dart';
 import 'package:crud/widgets/smalltext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/dimensions.dart';
 
-class AllMovies extends StatelessWidget {
-  AllMovies({Key? key}) : super(key: key);
-  final TopMoviesController topMoviesController = Get.find();
+class AllSongs extends StatelessWidget {
+  AllSongs({Key? key}) : super(key: key);
+  final TopSongsController topMoviesController = Get.find();
   final PopularTodayController popularTodayController = Get.find();
-  final MoviesController moviesController = Get.find();
+  final SongsController moviesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -27,12 +28,12 @@ class AllMovies extends StatelessWidget {
           ),
           Obx(
             () => Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
-                width: Dimensions.screenWidth - Dimensions.width20,
+                margin:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                width: Dimensions.screenWidth - Dimensions.width10,
                 height: Dimensions.height150 * 1.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius15),
-                  color: const Color.fromARGB(255, 56, 55, 55),
+                  color: AppColors.primary,
                 ),
                 child: popularTodayController.isLoding.value == false
                     ? Stack(
@@ -43,7 +44,7 @@ class AllMovies extends StatelessWidget {
                                 BorderRadius.circular(Dimensions.radius15),
                             child: Image.network(
                               popularTodayController
-                                  .popularMoviesList[0].movieImg,
+                                  .popularSongsList[0].songImg,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -61,6 +62,7 @@ class AllMovies extends StatelessWidget {
                                     children: [
                                       const BigText(
                                         text: "Popular Today",
+                                        color: Colors.white,
                                         fontWeight: FontWeight.w700,
                                       ),
                                       SizedBox(
@@ -85,26 +87,26 @@ class AllMovies extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                       onTap: (() {
-                                        Get.toNamed("/moviedetails",
+                                        Get.toNamed("/songsdetails",
                                             arguments: {
                                               "name": popularTodayController
-                                                  .popularMoviesList[0].name,
+                                                  .popularSongsList[0].name,
                                               "desc": popularTodayController
-                                                  .popularMoviesList[0].desc,
+                                                  .popularSongsList[0].desc,
                                               "dlink": popularTodayController
-                                                  .popularMoviesList[0].dlink,
+                                                  .popularSongsList[0].link,
                                               "rating": popularTodayController
-                                                  .popularMoviesList[0].rating,
+                                                  .popularSongsList[0].rating,
                                               "lang": popularTodayController
-                                                  .popularMoviesList[0].lang,
+                                                  .popularSongsList[0].lang,
                                               "img": popularTodayController
-                                                  .popularMoviesList[0]
-                                                  .movieImg,
+                                                  .popularSongsList[0]
+                                                  .songImg,
                                               "cat": popularTodayController
-                                                  .popularMoviesList[0].cat
+                                                  .popularSongsList[0].cat
                                             });
                                       }),
-                                      child: const DownloadIcon(boxSize: 40))
+                                      child: const PlayIcon(boxSize: 40))
                                 ],
                               ))
                         ],
@@ -119,13 +121,13 @@ class AllMovies extends StatelessWidget {
                 top: Dimensions.height30,
                 bottom: Dimensions.height30),
             child: const BigText(
-              text: "Top movies",
+              text: "Top Songs",
               size: 20,
               fontWeight: FontWeight.w700,
             ),
           ),
-          TopMovies(
-            topmovies: topMoviesController.topMoviesList,
+          TopSongs(
+            topsongs: topMoviesController.topSongsList,
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -136,10 +138,11 @@ class AllMovies extends StatelessWidget {
               text: "You may like",
               size: 20,
               fontWeight: FontWeight.w700,
+              
             ),
           ),
           YouMayLike(
-            movies: moviesController.moviesList,
+            songs: moviesController.songsList,
           ),
         ],
       ),

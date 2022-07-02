@@ -1,3 +1,4 @@
+import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class MovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bg,
       body: Stack(
         children: [
           //bg image
@@ -42,15 +43,15 @@ class MovieDetails extends StatelessWidget {
                   onTap: (() {
                     Get.back();
                   }),
-                  child: const AppIcon(
+                  child:  AppIcon(
                     icon: Icons.arrow_back,
-                    backgrounColor: Color.fromARGB(255, 28, 27, 27),
+                    backgrounColor: AppColors.primary2,
                     iconColor: Colors.white,
                   ),
                 ),
-                const AppIcon(
+                AppIcon(
                   icon: CupertinoIcons.heart,
-                  backgrounColor: Color.fromARGB(255, 28, 27, 27),
+                  backgrounColor: AppColors.primary2,
                   iconColor: Colors.white,
                 ),
               ],
@@ -72,7 +73,7 @@ class MovieDetails extends StatelessWidget {
                     topRight: Radius.circular(Dimensions.radius20),
                     topLeft: Radius.circular(Dimensions.radius20),
                   ),
-                  color: Colors.black),
+                  color: AppColors.bg),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -110,7 +111,7 @@ class MovieDetails extends StatelessWidget {
             topRight: Radius.circular(Dimensions.radius30),
             topLeft: Radius.circular(Dimensions.radius30),
           ),
-          color: const Color.fromARGB(255, 28, 27, 27),
+          color: AppColors.primary,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,8 +124,8 @@ class MovieDetails extends StatelessWidget {
                   right: Dimensions.width20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius10),
-                gradient: const LinearGradient(
-                  colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                gradient: LinearGradient(
+                  colors: [const Color(0xffffc3b1), AppColors.orange],
                   begin: Alignment.bottomRight,
                   end: Alignment.topLeft,
                 ),
@@ -160,8 +161,8 @@ class MovieDetails extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius10),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                        gradient: LinearGradient(
+                          colors: [const Color(0xffffc3b1), AppColors.orange],
                           begin: Alignment.bottomRight,
                           end: Alignment.topLeft,
                         ),
@@ -169,14 +170,14 @@ class MovieDetails extends StatelessWidget {
                       child: Row(
                         children: [
                           const BigText(
-                            text: "Download",
+                            text: "Listen",
                             color: Colors.white,
                           ),
                           SizedBox(
                             width: Dimensions.width10,
                           ),
                           const Icon(
-                            Icons.download,
+                            CupertinoIcons.play,
                             color: Colors.white,
                           )
                         ],

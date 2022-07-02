@@ -1,24 +1,25 @@
 // To parse this JSON data, do
 //
-//     final movies = moviesFromJson(jsonString);
+//     final topSongs = topSongsFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Movies> moviesFromJson(String str) =>
-    List<Movies>.from(json.decode(str).map((x) => Movies.fromJson(x)));
+List<TopSongs> topSongsFromJson(String str) =>
+    List<TopSongs>.from(json.decode(str).map((x) => TopSongs.fromJson(x)));
 
-String moviesToJson(List<Movies> data) =>
+String topSongsToJson(List<TopSongs> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Movies {
-  Movies({
+class TopSongs {
+  TopSongs({
     required this.id,
     required this.name,
     required this.desc,
-    required this.dlink,
-    required this.movieImg,
+    required this.link,
+    required this.songImg,
     required this.lang,
     required this.cat,
+    required this.rate,
     required this.rating,
     required this.createdAt,
     required this.v,
@@ -27,22 +28,24 @@ class Movies {
   String id;
   String name;
   String desc;
-  String dlink;
-  String movieImg;
+  String link;
+  String songImg;
   String lang;
   String cat;
+  String rate;
   int rating;
   DateTime createdAt;
   int v;
 
-  factory Movies.fromJson(Map<String, dynamic> json) => Movies(
+  factory TopSongs.fromJson(Map<String, dynamic> json) => TopSongs(
         id: json["_id"],
         name: json["name"],
         desc: json["desc"],
-        dlink: json["dlink"],
-        movieImg: json["movieImg"],
+        link: json["link"],
+        songImg: json["songImg"],
         lang: json["lang"],
         cat: json["cat"],
+        rate: json["rate"],
         rating: json["rating"],
         createdAt: DateTime.parse(json["created_at"]),
         v: json["__v"],
@@ -52,10 +55,11 @@ class Movies {
         "_id": id,
         "name": name,
         "desc": desc,
-        "dlink": dlink,
-        "movieImg": movieImg,
+        "link": link,
+        "songImg": songImg,
         "lang": lang,
         "cat": cat,
+        "rate": rate,
         "rating": rating,
         "created_at": createdAt.toIso8601String(),
         "__v": v,

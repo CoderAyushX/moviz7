@@ -1,24 +1,25 @@
+import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:crud/widgets/bigtext.dart';
-import 'package:crud/widgets/download_icon.dart';
+import 'package:crud/widgets/play_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class GridForMovies extends StatefulWidget {
-  final dynamic movies;
-  const GridForMovies({Key? key, required this.movies}) : super(key: key);
+class GridForSongs extends StatefulWidget {
+  final dynamic songs;
+  const GridForSongs({Key? key, required this.songs}) : super(key: key);
 
   @override
-  State<GridForMovies> createState() => _GridForMoviesState();
+  State<GridForSongs> createState() => _GridForSongsState();
 }
 
-class _GridForMoviesState extends State<GridForMovies> {
+class _GridForSongsState extends State<GridForSongs> {
   @override
   Widget build(BuildContext context) {
     //* container for padding
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      //*obx grid builder to make movies card
+      //*obx grid builder to make songs card
       child: Obx(() {
         return GridView.builder(
           shrinkWrap: true,
@@ -26,24 +27,24 @@ class _GridForMoviesState extends State<GridForMovies> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
-          itemCount: widget.movies.length,
+          itemCount: widget.songs.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: (() {
                 //? routing with arguments
-                Get.toNamed("/moviedetails", arguments: {
-                  "name": widget.movies[index].name,
-                  "desc": widget.movies[index].desc,
-                  "dlink": widget.movies[index].dlink,
-                  "rating": widget.movies[index].rating,
-                  "lang": widget.movies[index].lang,
-                  "img": widget.movies[index].movieImg,
-                  "cat": widget.movies[index].cat
+                Get.toNamed("/songsdetails", arguments: {
+                  "name": widget.songs[index].name,
+                  "desc": widget.songs[index].desc,
+                  "dlink": widget.songs[index].link,
+                  "rating": widget.songs[index].rating,
+                  "lang": widget.songs[index].lang,
+                  "img": widget.songs[index].songImg,
+                  "cat": widget.songs[index].cat
                 });
               }),
-              //? card of movies
+              //? card of songs
               child: Card(
-                color: const Color.fromARGB(255, 28, 27, 27),
+                color: AppColors.primary,
                 child: Column(
                   children: [
                     Container(
@@ -59,7 +60,7 @@ class _GridForMoviesState extends State<GridForMovies> {
                         child: FadeInImage(
                           placeholder:
                               const AssetImage("assets/images/iyu.jpg"),
-                          image: NetworkImage(widget.movies[index].movieImg),
+                          image: NetworkImage(widget.songs[index].songImg),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -72,10 +73,10 @@ class _GridForMoviesState extends State<GridForMovies> {
                           children: [
                             Expanded(
                                 child: BigText(
-                              text: widget.movies[index].name,
+                              text: widget.songs[index].name,
                               fontWeight: FontWeight.w600,
                             )),
-                            DownloadIcon(
+                            PlayIcon(
                               boxSize: Dimensions.height20 * 2,
                               iconSize: Dimensions.iconSize24,
                             )

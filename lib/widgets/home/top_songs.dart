@@ -1,12 +1,13 @@
-import 'package:crud/widgets/download_icon.dart';
+import 'package:crud/utils/colors.dart';
+import 'package:crud/widgets/play_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../utils/dimensions.dart';
 import '../bigtext.dart';
 
-class TopMovies extends StatelessWidget {
-  final dynamic topmovies;
-  const TopMovies({Key? key, required this.topmovies}) : super(key: key);
+class TopSongs extends StatelessWidget {
+  final dynamic topsongs;
+  const TopSongs({Key? key, required this.topsongs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,12 @@ class TopMovies extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: Dimensions.width20),
       height: Dimensions.pageViewContainer,
-      //? obx list view to build movies card
+      //? obx list view to build songs card
       child: Obx(() {
         return ListView.builder(
-          itemCount: topmovies.length,
+          itemCount: topsongs.length,
           itemBuilder: (context, index) {
-            //* movies card
+            //* songs card
             return Container(
               margin: EdgeInsets.only(right: Dimensions.width30),
               width: Dimensions.pageViewContainer,
@@ -36,7 +37,7 @@ class TopMovies extends StatelessWidget {
                       child: FadeInImage(
                         placeholder: const AssetImage("assets/images/iyu.jpg"),
                         image: NetworkImage(
-                          topmovies[index].movieImg,
+                          topsongs[index].songImg,
                         ),
                         height: Dimensions.pageViewContainer,
                         fit: BoxFit.cover,
@@ -66,25 +67,25 @@ class TopMovies extends StatelessWidget {
                           children: [
                             Expanded(
                               child: BigText(
-                                text: topmovies[index].name,
-                                color: Colors.black,
+                                text: topsongs[index].name,
+                                color: AppColors.bg,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             GestureDetector(
                               //* routing
                               onTap: (() {
-                                Get.toNamed("/moviedetails", arguments: {
-                                  "name": topmovies[index].name,
-                                  "desc": topmovies[index].desc,
-                                  "dlink": topmovies[index].dlink,
-                                  "rating": topmovies[index].rating,
-                                  "lang": topmovies[index].lang,
-                                  "img": topmovies[index].movieImg,
-                                  "cat": topmovies[index].cat
+                                Get.toNamed("/songsdetails", arguments: {
+                                  "name": topsongs[index].name,
+                                  "desc": topsongs[index].desc,
+                                  "dlink": topsongs[index].link,
+                                  "rating": topsongs[index].rating,
+                                  "lang": topsongs[index].lang,
+                                  "img": topsongs[index].songImg,
+                                  "cat": topsongs[index].cat
                                 });
                               }),
-                              child: DownloadIcon(
+                              child: PlayIcon(
                                   boxSize: Dimensions.height45,
                                   iconSize: Dimensions.height20),
                             )

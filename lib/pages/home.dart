@@ -1,11 +1,10 @@
-
-
-import 'package:crud/controller/movies_controller.dart';
+import 'package:crud/controller/songs_controller.dart';
 import 'package:crud/controller/popular_today_controller.dart';
-import 'package:crud/controller/search_movies_controller.dart';
-import 'package:crud/controller/top_movies_controller.dart';
-import 'package:crud/pages/home_tab/Bollywood.dart';
-import 'package:crud/pages/home_tab/all_movies.dart';
+import 'package:crud/controller/search_songs_controller.dart';
+import 'package:crud/controller/top_songs_controller.dart';
+import 'package:crud/pages/home_tab/all_songs.dart';
+import 'package:crud/pages/home_tab/other_pages.dart';
+import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:crud/widgets/home/appbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,11 +21,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
-  final TopMoviesController topMoviesController =
-      Get.put(TopMoviesController());
-  final MoviesController moviesController = Get.put(MoviesController());
-  final SearchMoviesController searchMoviesController =
-      Get.put(SearchMoviesController());
+  final TopSongsController topSongsController =
+      Get.put(TopSongsController());
+  final SongsController songsController = Get.put(SongsController());
+  final SearchSongsController searchMoviesController =
+      Get.put(SearchSongsController());
   final PopularTodayController popularTodayController =
       Get.put(PopularTodayController());
 
@@ -40,11 +39,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 5, vsync: this);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bg,
       appBar: BaseAppBar(
           title: const Text("Yephow7"),
           appBar: AppBar(),
-          myMenuItems: const ["Home", "Post A Movie"]),
+          myMenuItems: const ["Home", "Post A Song"]),
       body: Column(
         children: [
           SizedBox(
@@ -64,9 +63,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       margin:
                           EdgeInsets.symmetric(horizontal: Dimensions.width20),
                       decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius15),
-                          color: const Color.fromARGB(255, 56, 55, 55)),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius15),
+                        color: AppColors.primary,
+                      ),
                       child: TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -78,11 +78,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           errorStyle: TextStyle(
-                            fontSize: Dimensions.font16,
-                            height: 0.3
-                          ),
+                              fontSize: Dimensions.font16, height: 0.3),
                           border: InputBorder.none,
-                          hintText: "Search for a movie",
+                          hintText: "Search for a song",
                           hintStyle: const TextStyle(
                               color: Color.fromARGB(255, 143, 143, 143)),
                         ),
@@ -104,8 +102,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       decoration: BoxDecoration(
                         borderRadius:
                             BorderRadius.circular(Dimensions.radius15),
-                        gradient: const LinearGradient(
-                          colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                        gradient: LinearGradient(
+                          colors: [const Color(0xffffc3b1), AppColors.orange],
                           begin: Alignment.bottomRight,
                           end: Alignment.topLeft,
                         ),
@@ -132,15 +130,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
             height: Dimensions.height45 * 1.2,
             padding: EdgeInsets.only(bottom: Dimensions.height10),
             child: TabBar(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
                 controller: tabController,
                 labelColor: Colors.white,
                 isScrollable: true,
                 indicator: BoxDecoration(
                   borderRadius:
                       BorderRadius.circular(Dimensions.radius10 * 0.5),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xffffc3b1), Color(0xffff6a3b)],
+                  gradient:  LinearGradient(
+                  colors: [const Color(0xffffc3b1), AppColors.orange],
                     begin: Alignment.bottomRight,
                     end: Alignment.topLeft,
                   ),
@@ -150,17 +147,17 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     text: "All",
                   ),
                   Tab(
-                    text: "Bollywood",
+                    text: "English",
                   ),
                   Tab(
-                    text: "Hollywood",
+                    text: "Hindi",
                   ),
                   Tab(
-                    text: "South",
+                    text: "Kpop",
                   ),
                   Tab(
-                    text: "Anime",
-                  )
+                    text: "Others",
+                  ),
                 ]),
           ),
           //tabbar view
@@ -171,23 +168,27 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
-                    AllMovies(),
-                    Bollywood(
-                        text: "Top Bollywood movies",
-                        text2: "Bollywood movies",
-                        controller: moviesController.bollymoviesList),
-                    Bollywood(
-                        text: "Top Hollywood movies",
-                        text2: "Hollywood movies",
-                        controller: moviesController.hollymoviesList),
-                    Bollywood(
-                        text: "Top South movies",
-                        text2: "South movies",
-                        controller: moviesController.southmoviesList),
-                    Bollywood(
-                        text: "Top Animes",
-                        text2: "Animes",
-                        controller: moviesController.animemoviesList),
+                    AllSongs(),
+                    OtherPages(
+                        text: "Trending english songs",
+                        text2: "English songs",
+                        topcontroller: topSongsController.engTopSongsList,
+                        controller: songsController.engSongsList),
+                    OtherPages(
+                        text: "Trending Hindi songs",
+                        text2: "Hindi songs",
+                        topcontroller: topSongsController.hindiTopSongsList,
+                        controller:songsController.hindiSongsList),
+                    OtherPages(
+                        text: "Trending Kpop songs",
+                        text2: "Kpop songs",
+                        topcontroller:topSongsController.kpopTopSongsList ,
+                        controller: songsController.kpopSongsList),
+                    OtherPages(
+                        text: "Trending Others songs",
+                        text2: "You may like",
+                        topcontroller: topSongsController.otherTopSongsList,
+                        controller: songsController.othersSongsList),
                   ]),
             ),
           )

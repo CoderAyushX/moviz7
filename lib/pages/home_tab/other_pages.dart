@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../utils/dimensions.dart';
 import '../../widgets/bigtext.dart';
-import '../../widgets/home/top_movies.dart';
-import 'package:crud/widgets/home/grid_for_movies.dart';
+import '../../widgets/home/top_songs.dart';
+import 'package:crud/widgets/home/grid_for_songs.dart';
 
-class Bollywood extends StatelessWidget {
+class OtherPages extends StatelessWidget {
   final String text;
   final String text2;
+  final dynamic topcontroller;
   final dynamic controller;
-  const Bollywood(
+
+  const OtherPages(
       {Key? key,
       required this.text,
       required this.text2,
+      required this.topcontroller,
       required this.controller})
       : super(key: key);
   @override
@@ -32,8 +35,8 @@ class Bollywood extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          TopMovies(
-            topmovies: controller,
+          TopSongs(
+            topsongs: topcontroller,
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -46,8 +49,8 @@ class Bollywood extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          GridForMovies(
-            movies: controller,
+          GridForSongs(
+            songs: controller,
           ),
         ],
       ),
