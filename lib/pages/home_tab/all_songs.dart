@@ -28,11 +28,11 @@ class AllSongs extends StatelessWidget {
           ),
           Obx(
             () => Container(
-                margin:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                width: Dimensions.screenWidth - Dimensions.width10,
+                margin:  EdgeInsets.symmetric(horizontal: Dimensions.width30/2),
+                width: Dimensions.screenWidth ,
                 height: Dimensions.height150 * 1.5,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  borderRadius: BorderRadius.circular(Dimensions.radius10),
                   color: AppColors.primary,
                 ),
                 child: popularTodayController.isLoding.value == false
@@ -41,7 +41,7 @@ class AllSongs extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius:
-                                BorderRadius.circular(Dimensions.radius15),
+                                BorderRadius.circular(Dimensions.radius10),
                             child: Image.network(
                               popularTodayController
                                   .popularSongsList[0].songImg,

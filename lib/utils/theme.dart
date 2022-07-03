@@ -18,6 +18,6 @@ class MyTheme {
             titleTextStyle: TextStyle(
                 color: Colors.white70,
                 fontWeight: FontWeight.bold,
-                fontSize: 20)));
+                fontSize: 18)));
   }
 }

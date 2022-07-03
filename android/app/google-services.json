@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421698452330",
+    "project_id": "yephow7",
+    "storage_bucket": "yephow7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421698452330:android:4cc2532102b3075d064313",
+        "android_client_info": {
+          "package_name": "com.yephow.musics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421698452330-iqoprk849jbh3ut5amfbtg0e4bel67n8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_ubdZR0_gmF9un3QFPZqm9l1oKeeni_Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421698452330-iqoprk849jbh3ut5amfbtg0e4bel67n8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

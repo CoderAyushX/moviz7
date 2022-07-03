@@ -2,11 +2,13 @@ import 'package:crud/controller/songs_controller.dart';
 import 'package:crud/controller/popular_today_controller.dart';
 import 'package:crud/controller/search_songs_controller.dart';
 import 'package:crud/controller/top_songs_controller.dart';
+import 'package:crud/notificationservice/local_notification_service.dart';
 import 'package:crud/pages/home_tab/all_songs.dart';
 import 'package:crud/pages/home_tab/other_pages.dart';
 import 'package:crud/utils/colors.dart';
 import 'package:crud/utils/dimensions.dart';
 import 'package:crud/widgets/home/appbar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,8 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
-  final TopSongsController topSongsController =
-      Get.put(TopSongsController());
+  final TopSongsController topSongsController = Get.put(TopSongsController());
   final SongsController songsController = Get.put(SongsController());
   final SearchSongsController searchMoviesController =
       Get.put(SearchSongsController());
@@ -35,13 +36,55 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     super.dispose();
   }
 
+//* firebase notification
+  @override
+  void initState() {
+    super.initState();
+
+    //? 1. This method call when app in terminated state and you get a notification
+    //? when you click on notification app open from terminated state and you can get notification data in this method
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          // if (message.data['_id'] != null) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => DemoScreen(
+          //         id: message.data['_id'],
+          //       ),
+          //     ),
+          //   );
+          // }
+        }
+      },
+    );
+
+    //? 2. This method only call when App in forground it mean app must be opened
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        if (message.notification != null) {
+          LocalNotificationService.createanddisplaynotification(message);
+        }
+      },
+    );
+
+    //? 3. This method only call when App in background and not terminated(not closed)
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        if (message.notification != null) {
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     TabController tabController = TabController(length: 5, vsync: this);
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: BaseAppBar(
-          title: const Text("Yephow7"),
+          title: const Text("YEPHOW7"),
           appBar: AppBar(),
           myMenuItems: const ["Home", "Post A Song"]),
       body: Column(
@@ -136,8 +179,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                 indicator: BoxDecoration(
                   borderRadius:
                       BorderRadius.circular(Dimensions.radius10 * 0.5),
-                  gradient:  LinearGradient(
-                  colors: [const Color(0xffffc3b1), AppColors.orange],
+                  gradient: LinearGradient(
+                    colors: [const Color(0xffffc3b1), AppColors.orange],
                     begin: Alignment.bottomRight,
                     end: Alignment.topLeft,
                   ),
@@ -178,11 +221,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                         text: "Trending Hindi songs",
                         text2: "Hindi songs",
                         topcontroller: topSongsController.hindiTopSongsList,
-                        controller:songsController.hindiSongsList),
+                        controller: songsController.hindiSongsList),
                     OtherPages(
                         text: "Trending Kpop songs",
                         text2: "Kpop songs",
-                        topcontroller:topSongsController.kpopTopSongsList ,
+                        topcontroller: topSongsController.kpopTopSongsList,
                         controller: songsController.kpopSongsList),
                     OtherPages(
                         text: "Trending Others songs",
