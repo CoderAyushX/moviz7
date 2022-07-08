@@ -17,13 +17,12 @@ class PopularTodayController extends GetxController {
     try {
       isLoding(true);
       var data = await RemoteServices.fetchTopSongs(
-          "http://localhost:8000/api/v1/populartodaysongs");
+          "https://yephow.herokuapp.com/api/v1/populartodaysongs");
 
       if (data.isNotEmpty) {
         popularSongsList.value = data;
+        isLoding(false);
       }
-    } finally {
-      isLoding(false);
-    }
+    } finally {}
   }
 }

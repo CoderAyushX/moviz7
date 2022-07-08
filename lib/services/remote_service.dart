@@ -8,7 +8,7 @@ import '../model/topsongs_module.dart';
 class RemoteServices {
   static var client = http.Client();
   //? url
-  final String _url = "http://localhost:8000/api/v1/";
+  final String _url = "https://yephow.herokuapp.com/api/v1/";
 
   static Future<List<TopSongs>> fetchTopSongs(String url) async {
     http.Response response = await client.get(Uri.parse(url));

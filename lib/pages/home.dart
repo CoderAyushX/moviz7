@@ -21,6 +21,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin {
+  late TabController tabController;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textController = TextEditingController();
   final TopSongsController topSongsController = Get.put(TopSongsController());
@@ -32,14 +33,16 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _textController.dispose();
     super.dispose();
+    _textController.dispose();
+    tabController.dispose();
   }
 
 //* firebase notification
   @override
   void initState() {
     super.initState();
+    tabController = TabController(vsync: this, length: 5);
 
     //? 1. This method call when app in terminated state and you get a notification
     //? when you click on notification app open from terminated state and you can get notification data in this method
@@ -72,15 +75,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     //? 3. This method only call when App in background and not terminated(not closed)
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
-        if (message.notification != null) {
-        }
+        if (message.notification != null) {}
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 5, vsync: this);
     return Scaffold(
       backgroundColor: AppColors.bg,
       appBar: BaseAppBar(
@@ -133,10 +134,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   GestureDetector(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        Get.toNamed("/search",
-                            arguments: {"text": _textController.text});
                         searchMoviesController
                             .fetchProduct(_textController.text);
+                        Get.toNamed("/search",
+                            arguments: {"text": _textController.text});
                       }
                     },
                     child: Container(
@@ -211,7 +212,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
-                    AllSongs(),
+                    const AllSongs(),
                     OtherPages(
                         text: "Trending english songs",
                         text2: "English songs",

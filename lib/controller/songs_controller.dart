@@ -19,7 +19,7 @@ class SongsController extends GetxController {
     try {
       isLoding(true);
       var data = await RemoteServices.fetchSongs(
-          "http://localhost:8000/api/v1/songs");
+          "https://yephow.herokuapp.com/api/v1/songs");
 
       if (data.isNotEmpty) {
         songsList.value = data;

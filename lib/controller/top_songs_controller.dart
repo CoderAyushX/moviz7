@@ -21,7 +21,7 @@ class TopSongsController extends GetxController {
     try {
       isLoding(true);
       var data = await RemoteServices.fetchTopSongs(
-          "http://localhost:8000/api/v1/topsongs");
+          "https://yephow.herokuapp.com/api/v1/topsongs");
 
       if (data.isNotEmpty) {
         topSongsList.value = data;

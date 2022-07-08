@@ -7,17 +7,38 @@ import 'package:crud/widgets/smalltext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PostASong extends StatelessWidget {
+class PostASong extends StatefulWidget {
+  const PostASong({Key? key}) : super(key: key);
+
+  @override
+  State<PostASong> createState() => _PostASongState();
+}
+
+class _PostASongState extends State<PostASong> {
   final _formKey = GlobalKey<FormState>();
- PostASong({Key? key}) : super(key: key);
 
   //? controllers
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController songUrlController = TextEditingController();
+
   final TextEditingController langController = TextEditingController();
+
   final TextEditingController catController = TextEditingController();
+
   final TextEditingController linkController = TextEditingController();
+
   final TextEditingController descController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    songUrlController.dispose();
+    catController.dispose();
+    linkController.dispose();
+    descController.dispose();
+  }
 
   _postData() async {
     Map data = {
@@ -73,7 +94,7 @@ class PostASong extends StatelessWidget {
                         Icons.image,
                         color: Colors.white,
                       ),
-                      controller:songUrlController,
+                      controller: songUrlController,
                       regExp: RegExp(
                           r"^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"),
                     ),
@@ -188,8 +209,7 @@ class PostASong extends StatelessWidget {
                         ),
                         OutlinedButton(
                           style: OutlinedButton.styleFrom(
-                            side:  BorderSide(
-                                color: AppColors.orange, width: 1),
+                            side: BorderSide(color: AppColors.orange, width: 1),
                           ),
                           onPressed: () {
                             Get.back();

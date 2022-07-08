@@ -1,5 +1,5 @@
+
 import 'package:crud/utils/colors.dart';
-import 'package:crud/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,22 +24,26 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      automaticallyImplyLeading: false,
       //* actions buttons
       actions: <Widget>[
-        Padding(
-            padding: EdgeInsets.only(right: Dimensions.width20),
-            //? notification dot button
-            child: GestureDetector(
-              onTap: () {},
-              child: const Icon(
-                Icons.notifications_outlined,
-                size: 26.0,
-              ),
-            )),
+        // Padding(
+        //     padding: EdgeInsets.only(right: Dimensions.width20),
+        //     //? notification dot button
+        //     child: GestureDetector(
+        //       onTap: () {
+             
+        //       },
+        //       child: const Icon(
+        //         Icons.refresh_rounded,
+        //         size: 26.0,
+        //       ),
+        //     )),
         //? three dot button
         PopupMenuButton<String>(
             color: AppColors.primary,
@@ -62,6 +66,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
+
   //* abstract class overriding
   @override
   Size get preferredSize => Size.fromHeight(appBar.preferredSize.height);

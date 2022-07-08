@@ -41,6 +41,8 @@ dependencies:
   flutter_local_notifications: ^9.6.1
   firebase_core: ^1.19.1
   firebase_messaging: ^11.4.4
+  shared_preferences: ^2.0.15
+  dots_indicator: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,14 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.9.3
+  flutter_native_splash: ^2.2.4
+
+flutter_native_splash:
+  color: "#082032"
+  image: assets/icon/addicon.png
+  android: true
+  ios: true
+  
 flutter_icons:
   android: true
   ios: true

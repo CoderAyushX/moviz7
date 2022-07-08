@@ -43,7 +43,7 @@ class MovieDetails extends StatelessWidget {
                   onTap: (() {
                     Get.back();
                   }),
-                  child:  AppIcon(
+                  child: AppIcon(
                     icon: Icons.arrow_back,
                     backgrounColor: AppColors.primary2,
                     iconColor: Colors.white,
